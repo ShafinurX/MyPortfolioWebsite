@@ -1,7 +1,8 @@
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../Component/Navbar.jsx';
-
+import myImage from '../assets/Shafinur.png';
+import myCV from '../assets/Shafinur_Rahman_CV.pdf';
 const Home = () => {
   const location = useLocation();
 
@@ -14,8 +15,7 @@ const Home = () => {
         <div className="hero min-h-[80vh] px-4 lg:px-20">
           <div className="hero-content flex-col lg:flex-row-reverse gap-10 lg:gap-20">
             {/* আপনার ছবি */}
-            <img
-              src="/Shafinur.png"
+            <img src={myImage}  
               className="max-w-xs lg:max-w-sm rounded-3xl shadow-2xl border-4 border-primary" 
               alt="Shafinur Rahman"
               
@@ -35,9 +35,7 @@ const Home = () => {
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <button className="btn btn-primary text-white px-8">Hire Me</button>
 
-                <a 
-                  href="/Shafinur_Rahman_CV.pdf" 
-                  download="Shafinur_Rahman_CV.pdf" 
+               <a href={myCV} download="Shafinur_Rahman_CV.pdf"
                   className="btn btn-outline btn-primary text-white px-8"
                 >
                   Download CV
