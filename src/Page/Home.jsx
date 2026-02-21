@@ -15,9 +15,10 @@ const Home = () => {
           <div className="hero-content flex-col lg:flex-row-reverse gap-10 lg:gap-20">
             {/* আপনার ছবি */}
             <img
-              src="https://scontent.fdac177-1.fna.fbcdn.net/v/t39.30808-6/561777478_2143122209514759_2719105854578216340_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeE3tPGNqy_Ba2KREmW2D8qpFY_plc595pcVj-mVzn3ml0sj2ZWWx-ZLdS-ObCGa7A4CYda7ZLtsZyBOrdaNoL_6&_nc_ohc=rcDouXGdQD0Q7kNvwE-esE6&_nc_oc=Adl3pgbPWZOCYzSvBRcQDZlFZ9EtU86Qt8cX2tXJQtGV5IHga7oLizCaRiurkV6VnZU&_nc_zt=23&_nc_ht=scontent.fdac177-1.fna&_nc_gid=uQYc8O5yJT7fGpMfzvezAQ&oh=00_Afv5W6G50MRPLoKHiCPRWwg6nTqfMDOe814ROCG4M1wceA&oe=6987714B"
+              src="/Shafinur.png"
               className="max-w-xs lg:max-w-sm rounded-3xl shadow-2xl border-4 border-primary" 
               alt="Shafinur Rahman"
+              
             />
             
             {/* আপনার তথ্য */}
