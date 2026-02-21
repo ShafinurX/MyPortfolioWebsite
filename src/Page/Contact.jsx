@@ -1,7 +1,40 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
 
 const Contact = () => {
+  const form = useRef();
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+
+    // EmailJS দিয়ে ইমেইল পাঠানোর লজিক
+    emailjs.sendForm(
+      'service_ow0auwh',   // আপনার EmailJS Service ID এখানে বসান
+      'template_j0jo1co',  // আপনার EmailJS Template ID এখানে বসান
+      form.current,
+      'jNbE9dIVPpbF72pcB'    // আপনার EmailJS Public Key এখানে বসান
+    )
+    .then((result) => {
+        // মেসেজ সফলভাবে গেলে পপ-আপ দেখাবে
+        Swal.fire({
+          title: "Success!",
+          text: "Thanks! I have received your message.",
+          icon: "success",
+          confirmButtonColor: "#00D1FF"
+        });
+        e.target.reset(); // ফর্মটি খালি করে দেবে
+    }, (error) => {
+        // এরর হলে দেখাবে
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong. Please try again later.",
+          icon: "error"
+        });
+    });
+  };
+
   return (
     <div className="py-10 px-5 lg:px-20 min-h-screen bg-base-100">
       <div className="max-w-5xl mx-auto">
@@ -13,7 +46,6 @@ const Contact = () => {
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
             
-            {/* ফোন কার্ড */}
             <div className="flex items-center gap-4 bg-base-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all">
               <div className="bg-primary p-4 rounded-full text-white">
                 <FaPhoneAlt size={20} />
@@ -24,7 +56,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* ইমেইল কার্ড */}
             <div className="flex items-center gap-4 bg-base-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all">
               <div className="bg-secondary p-4 rounded-full text-white">
                 <FaEnvelope size={20} />
@@ -35,7 +66,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* ঠিকানা কার্ড */}
             <div className="flex items-center gap-4 bg-base-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all">
               <div className="bg-accent p-4 rounded-full text-white">
                 <FaMapMarkerAlt size={20} />
@@ -46,10 +76,10 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* সরাসরি হোয়াটসঅ্যাপ বাটন */}
             <a 
               href="https://wa.me/8801303312759" 
               target="_blank" 
+              rel="noreferrer"
               className="btn btn-success btn-block text-white gap-2 mt-4"
             >
               <FaWhatsapp size={20} /> Chat on WhatsApp
@@ -59,17 +89,36 @@ const Contact = () => {
           {/* মেসেজ ফর্ম */}
           <div className="bg-base-200 p-8 rounded-3xl shadow-lg">
             <h3 className="text-2xl font-semibold mb-6">Send me a Message</h3>
-            <form className="space-y-4">
+            
+            {/* form এ ref এবং onSubmit যোগ করা হয়েছে */}
+            <form ref={form} onSubmit={handleSendMessage} className="space-y-4">
               <div className="form-control">
-                <input type="text" placeholder="Your Name" className="input input-bordered focus:input-primary" required />
+                <input 
+                  type="text" 
+                  name="from_name" // EmailJS টেমপ্লেটের সাথে মিল রেখে নাম
+                  placeholder="Your Name" 
+                  className="input input-bordered focus:input-primary" 
+                  required 
+                />
               </div>
               <div className="form-control">
-                <input type="email" placeholder="Your Email" className="input input-bordered focus:input-primary" required />
+                <input 
+                  type="email" 
+                  name="from_email" 
+                  placeholder="Your Email" 
+                  className="input input-bordered focus:input-primary" 
+                  required 
+                />
               </div>
               <div className="form-control">
-                <textarea className="textarea textarea-bordered h-32 focus:textarea-primary" placeholder="Your Message"></textarea>
+                <textarea 
+                  name="message" 
+                  className="textarea textarea-bordered h-32 focus:textarea-primary" 
+                  placeholder="Your Message"
+                  required
+                ></textarea>
               </div>
-              <button className="btn btn-primary btn-block text-white">Send Message</button>
+              <button type="submit" className="btn btn-primary btn-block text-white">Send Message</button>
             </form>
           </div>
 
